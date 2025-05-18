@@ -1,15 +1,47 @@
-# Exploratory_Data_Analysis
-# EDA
+# SQL project to explore and analyze layoffs data
+
+This project demonstrates an exploratory data analysis (EDA) workflow using SQL on a global layoffs dataset. The aim was to uncover patterns, trends, and insights such as which companies had the largest layoffs, which industries were most affected, and how layoffs evolved over time.
+
+---
+
+## Dataset Overview  
+The dataset includes records of layoffs across various companies, with fields such as:
+
+- company  
+- location  
+- industry  
+- total_laid_off  
+- percentage_laid_off  
+- date  
+- stage  
+- country  
+- funds_raised_millions  
+
+--
+
+## Tools Used  
+- MySQL  
+- SQL (Aggregations, Window Functions, CTEs, Date Functions)  
+- GitHub  
+
+---
+
+## Data Exploration Steps  
+
+```sql
+
+-- Preview the dataset
+
+SELECT * FROM world_layoffs.layoffs_staging;
 
 -- We are going to explore the data and find trends or patterns or anything interesting like outliers
 
-SELECT * 
-FROM world_layoffs.layoffs_staging;
+-- The Largest Single Layoff
 
 SELECT MAX(total_laid_off)
 FROM world_layoffs.layoffs_staging;
 
--- Looking at Percentage to see how big these layoffs were
+-- Extreme percentage layoffs (complete shutdowns)
 
 SELECT MAX(percentage_laid_off),  MIN(percentage_laid_off)
 FROM world_layoffs.layoffs_staging
@@ -121,9 +153,16 @@ SELECT SUBSTRING(date,1,7) as dates, SUM(total_laid_off) AS total_laid_off
 FROM layoffs_staging
 GROUP BY dates
 ORDER BY dates ASC
+
 )
 SELECT dates, SUM(total_laid_off) OVER (ORDER BY dates ASC) as rolling_total_layoffs
 FROM DATE_CTE
 ORDER BY dates ASC;
 
 -- Now that we have done a basic Exploratory Data Analysis on this dataset, we have a better understanding of the Layoffs Data
+
+```
+
+# Summary
+
+By performing this SQL-based exploration, we identified key companies, industries, and countries most affected by layoffs. We also tracked layoff trends across months and years, and highlighted extreme cases such as companies with 100% workforce reduction.
