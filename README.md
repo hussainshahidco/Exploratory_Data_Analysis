@@ -17,7 +17,7 @@ The dataset includes records of layoffs across various companies, with fields su
 - country  
 - funds_raised_millions  
 
---
+---
 
 ## Tools Used  
 - MySQL  
